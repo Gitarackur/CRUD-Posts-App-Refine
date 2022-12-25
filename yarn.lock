@@ -1669,12 +1669,26 @@
     remark-gfm "^1.0.0"
     tslib "^2.3.1"
 
+"@pankod/refine-react-hook-form@^3.37.2":
+  version "3.37.2"
+  resolved "https://registry.yarnpkg.com/@pankod/refine-react-hook-form/-/refine-react-hook-form-3.37.2.tgz#2869dd3bf99f1286c37ca955deb025774ed23e19"
+  integrity sha512-ejwmPTJ4NF56UTUNQxFmNqHwQSeglqtOkgiDG5hWRjiQskWsUQaRhzRo2WaK4Neguye9YpKQtrn03t8zH3k0Bg==
+  dependencies:
+    react-hook-form "^7.30.0"
+
 "@pankod/refine-react-router-v6@^3.18.0":
   version "3.36.4"
   resolved "https://registry.yarnpkg.com/@pankod/refine-react-router-v6/-/refine-react-router-v6-3.36.4.tgz#cd9e39f8fa586fe09159d6330e60f54248481fdc"
   integrity sha512-1MO7S7Rgo+j1ThHJdCwvLB6alXNR7NOAKLU+P92SMfSLWxCqea8RYig8trFIqlcEuXFRbm5gOYMWMiMnDtfL8A==
   dependencies:
     react-router-dom "6.3.0"
+
+"@pankod/refine-react-table@^4.9.0":
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/@pankod/refine-react-table/-/refine-react-table-4.9.0.tgz#50bed569c02934a850db7157f4552ef578960e0d"
+  integrity sha512-vV++szuy9I5tewRETk/BShKMuGRYrYtFLv5/T2WVXIe8y02EgXTCvsWVZFnQCUDy33jHqTtSN780mN0IzlxpRw==
+  dependencies:
+    "@tanstack/react-table" "^8.2.6"
 
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.3":
   version "0.5.10"
@@ -1905,6 +1919,18 @@
   dependencies:
     "@tanstack/query-core" "4.18.0"
     use-sync-external-store "^1.2.0"
+
+"@tanstack/react-table@^8.2.6":
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.7.0.tgz#853fae74db6bf49738d0f18e4d507b00262fc09c"
+  integrity sha512-VJ+9rsymDLaSU35rWOfX0bwNXnpW1i+T14wi+sHx8lxwAsfg6IY1Yw7FPfGADvUFP5eQn2t4nlohAJd+IoEj/Q==
+  dependencies:
+    "@tanstack/table-core" "8.7.0"
+
+"@tanstack/table-core@8.7.0":
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.7.0.tgz#046e376cd536cd53727a91a880345f92d3ec5859"
+  integrity sha512-DRiRbOAmDHapzUBd4/C4Yy+FTug4fdGp5sdZWWfCq4wxRoaXQraQgbzmK23a3QcbwLFtLeNezPkZrqbJWuX+VA==
 
 "@testing-library/dom@^7.28.1":
   version "7.31.2"
@@ -8341,7 +8367,7 @@ postcss@^7.0.35:
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postcss@^8.3.5, postcss@^8.4.18, postcss@^8.4.4:
+postcss@^8.3.5, postcss@^8.4.18, postcss@^8.4.19, postcss@^8.4.4:
   version "8.4.19"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.19.tgz#61178e2add236b17351897c8bcc0b4c8ecab56fc"
   integrity sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==
@@ -8613,6 +8639,11 @@ react-error-overlay@^6.0.11:
   version "6.0.11"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.11.tgz#92835de5841c5cf08ba00ddd2d677b6d17ff9adb"
   integrity sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==
+
+react-hook-form@^7.30.0:
+  version "7.41.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.41.0.tgz#cc0871f4784e7233ac8466300da557d622154414"
+  integrity sha512-u1cHOXujr+AsNBoeCtcCuRwPh87mXAgKtXqd3qTCBgNFYzVZLXjYgLcynORpAgqhe24r5scucR8+6gfWaXBtHQ==
 
 react-i18next@^11.8.11:
   version "11.18.6"
@@ -9711,7 +9742,7 @@ symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-tailwindcss@^3.0.2:
+tailwindcss@^3.0.2, tailwindcss@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.4.tgz#afe3477e7a19f3ceafb48e4b083e292ce0dc0250"
   integrity sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==
