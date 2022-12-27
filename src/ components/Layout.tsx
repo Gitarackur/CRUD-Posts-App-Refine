@@ -8,10 +8,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { push } = useNavigation();
 
   return (
-    <div className="flex min-h-screen flex-col md:flex-row border">
-      <div className="md:w-2/12 mb-2 border-b py-2">
+    <div className="flex min-h-screen flex-col md:flex-col border">
+      <div className="md:w-12/12 mb-2 border-b py-2">
         <div className="container mx-auto">
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-row items-center gap-2">
             <Link to="/">
               <img
                 className="w-32"
@@ -37,7 +37,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
       </div>
 
-      <div className="md:w-10/12 bg-white overflow-auto">{children}</div>
+      <div className="border md:w-12/12 bg-white overflow-auto">{children}</div>
     </div>
   );
 };

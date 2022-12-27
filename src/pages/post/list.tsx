@@ -1,7 +1,7 @@
 import React from "react";
 import { useTable, ColumnDef, flexRender } from "@pankod/refine-react-table";
-import { IPost } from "../../interfaces/post";
-import { useNavigation, useDelete } from "@pankod/refine-core";
+import { ICategory, IPost } from "../../interfaces/post";
+import { useNavigation, useDelete, GetManyResponse, useMany } from "@pankod/refine-core";
 
 
 export const PostList: React.FC = () => {
@@ -34,6 +34,14 @@ export const PostList: React.FC = () => {
         id: "category",
         header: "Category",
         accessorKey: "category",
+        cell: function render({ getValue, table }) {
+          const meta = table.options.meta as {
+            categoriesData: GetManyResponse<ICategory>;
+          };
+          let singleValue:string[] | any = getValue();
+          const category = meta.categoriesData?.data?.find(item =>  item.id === singleValue[0])
+          return category?.name ?? "Loading...";
+        },
       },
       {
         id: "status",
@@ -105,12 +113,35 @@ export const PostList: React.FC = () => {
     [],
   );
 
-  const { getHeaderGroups, getRowModel } = useTable<IPost>({
-    columns,
+  const {
+    getHeaderGroups,
+    getRowModel,
+    setOptions,
+    refineCore: {
+      tableQueryResult: { data: tableData },
+    },
+  } = useTable<IPost>({ columns });
+
+  const categoryIds = tableData?.data?.map((item) => item.category[0]) ?? [];
+  
+  const { data: categoriesData } = useMany<ICategory>({
+    resource: "category",
+    ids: categoryIds,
+    queryOptions: {
+      enabled: categoryIds.length > 0,
+    },
   });
 
+  setOptions((prev) => ({
+    ...prev,
+    meta: {
+      ...prev.meta,
+      categoriesData,
+    },
+  }));
+
   return (
-    <div className="container mx-auto pb-4">
+    <div className="mx-auto pb-4">
       <div className="mb-3 mt-1 flex items-center justify-end">
         <button
           className="flex items-center justify-between gap-1 rounded border border-gray-200 bg-indigo-500 p-2 text-xs font-medium leading-tight text-white transition duration-150 ease-in-out hover:bg-indigo-600"
@@ -122,11 +153,11 @@ export const PostList: React.FC = () => {
 
       <table className="min-w-full table-fixed divide-y divide-gray-200 border">
         <thead className="bg-gray-100">
-          {getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
+          {getHeaderGroups().map((headerGroup, idx) => (
+            <tr key={idx}>
+              {headerGroup.headers.map((header, idx) => (
                 <th
-                  key={header.id}
+                  key={idx}
                   colSpan={header.colSpan}
                   className="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider text-gray-700 "
                 >
@@ -140,16 +171,16 @@ export const PostList: React.FC = () => {
           ))}
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
-          {getRowModel().rows.map((row) => {
+          {getRowModel().rows.map((row, idx) => {
             return (
               <tr
-                key={row.id}
+                key={idx}
                 className="transition hover:bg-gray-100"
               >
-                {row.getVisibleCells().map((cell) => {
+                {row.getVisibleCells().map((cell, idx) => {
                   return (
                     <td
-                      key={cell.id}
+                      key={idx}
                       className="whitespace-nowrap py-2 px-6 text-sm font-medium text-gray-900"
                     >
                       {flexRender(

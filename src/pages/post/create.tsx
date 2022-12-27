@@ -1,18 +1,35 @@
+import { useSelect } from "@pankod/refine-core";
 import { useForm } from "@pankod/refine-react-hook-form";
 import React from "react";
 
 export const PostCreate: React.FC = () => {
   const {
-    refineCore: { onFinish, formLoading, queryResult },
+    refineCore: { onFinish, formLoading },
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { options } = useSelect({
+    resource: "category",
+    optionLabel: "name",
+    optionValue: "id"
+  });
+
+  console.log('options', options);
+
+
+  const onSubmit = (values: any)=> {
+    onFinish({
+      ...values,
+      category: [values.category]
+    })
+  }
   
   return (
     <div className="container mx-auto">
       <br />
-      <form onSubmit={handleSubmit(onFinish)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-6">
           <label
             htmlFor="Name"
@@ -98,11 +115,12 @@ export const PostCreate: React.FC = () => {
             <option value={""} disabled>
               Please select
             </option>
-            <option value="Information Technology">Information Technology</option>
-            <option value="Fun">Fun</option>
-            <option value="Drama">Drama</option>
+            {options?.map((category) => (
+              <option key={category.value} value={category.value}>
+                {category.label}
+              </option>
+            ))}
           </select>
-
 
           {errors.category && (
             <p className="mt-1 text-sm text-red-600">

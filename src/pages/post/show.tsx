@@ -1,4 +1,4 @@
-import { useShow } from "@pankod/refine-core";
+import { useSelect, useShow } from "@pankod/refine-core";
 
 import { IPost } from "../../interfaces/post";
 
@@ -6,6 +6,13 @@ export const PostShow: React.FC = () => {
   const { queryResult } = useShow<IPost>();
   const { data } = queryResult;
   const record = data?.data;
+
+  const { options } = useSelect({
+    resource: "category",
+    defaultValue: queryResult?.data?.data.category[0],
+    optionLabel: "name",
+    optionValue: "id"
+  });
 
   return (
     <div className="container mx-auto">
@@ -49,7 +56,7 @@ export const PostShow: React.FC = () => {
       <div className="mb-6">
         <label className="mb-2 block text-sm font-medium">Category</label>
         <input
-          value={record?.category}
+          value={options?.find(curr => curr?.value === record?.category[0])?.label || record?.category}
           disabled
           className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm"
         />
