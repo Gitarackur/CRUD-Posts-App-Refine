@@ -21,16 +21,6 @@ export const PostList: React.FC = () => {
         accessorKey: "Name",
       },
       {
-        id: "title",
-        header: "Title",
-        accessorKey: "title",
-      },
-      {
-        id: "content",
-        header: "Content",
-        accessorKey: "content",
-      },
-      {
         id: "category",
         header: "Category",
         accessorKey: "category",
@@ -49,63 +39,42 @@ export const PostList: React.FC = () => {
         accessorKey: "Status",
       },
       {
-        id: "createdAt",
-        header: "CreatedAt",
-        accessorKey: "createdAt",
-      },
-      {
         id: "action",
         header: "Action",
         accessorKey: "id",
         cell: function render({ getValue }) {
           return (
-            <button
-              className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
-              onClick={() =>
-                show("posts", getValue() as number)
-              }
-            >
-              View
-            </button>
-          );
-        },
-      },
-      {
-        id: "action",
-        header: "Action",
-        accessorKey: "id",
-        cell: function render({ getValue }) {
-          return (
-            <button
-              className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
-              onClick={() =>
-                edit("posts", getValue() as number)
-              }
-            >
-              Edit
-            </button>
-          );
-        },
-      },
+            <>
+              <button
+                className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
+                onClick={() =>
+                  show("posts", getValue() as number)
+                }
+              >
+                View
+              </button>
 
-      {
-        id: "action",
-        header: "Action",
-        accessorKey: "id",
-        cell: function render({ getValue }) {
-          return (
-            <button
-              className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-red-500 hover:text-white"
-              onClick={() =>
-                mutate({
-                  id: getValue() as number,
-                  resource: "posts",
-                })
-              }
-            >
-              Delete
-            </button>
+              <button
+                className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
+                onClick={() =>
+                  edit("posts", getValue() as number)
+                }
+              >
+                Edit
+              </button>
 
+              <button
+                className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-red-500 hover:text-white"
+                onClick={() =>
+                  mutate({
+                    id: getValue() as number,
+                    resource: "posts",
+                  })
+                }
+              >
+                Delete
+              </button>
+            </>
           );
         },
       },

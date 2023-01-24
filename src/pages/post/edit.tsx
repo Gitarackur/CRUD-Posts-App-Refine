@@ -27,7 +27,7 @@ export const PostEdit: React.FC = () => {
   const onSubmit = (values: any)=> {
     onFinish({
       ...values,
-      category: [values.category]
+      category: [...values.category]
     })
   }
   
