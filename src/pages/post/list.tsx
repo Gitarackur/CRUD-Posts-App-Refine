@@ -28,8 +28,8 @@ export const PostList: React.FC = () => {
           const meta = table.options.meta as {
             categoriesData: GetManyResponse<ICategory>;
           };
-          let singleValue:string[] | any = getValue();
-          const category = meta.categoriesData?.data?.find(item =>  item.id === singleValue[0])
+          let singleValue: string[] | any = getValue();
+          const category = meta.categoriesData?.data?.find(item => item.id === singleValue[0]);
           return category?.name ?? "Loading...";
         },
       },
@@ -89,10 +89,19 @@ export const PostList: React.FC = () => {
     refineCore: {
       tableQueryResult: { data: tableData },
     },
+    getState,
+    setPageIndex,
+    getCanPreviousPage,
+    getPageCount,
+    getCanNextPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    getColumn,
   } = useTable<IPost>({ columns });
 
   const categoryIds = tableData?.data?.map((item) => item.category[0]) ?? [];
-  
+
   const { data: categoriesData } = useMany<ICategory>({
     resource: "category",
     ids: categoryIds,
@@ -164,6 +173,77 @@ export const PostList: React.FC = () => {
           })}
         </tbody>
       </table>
+
+
+      <div className="flex items-center justify-between mx-auto mt-12">
+        <div className="md:w-7/12 flex items-center justify-between mx-auto">
+          <button
+            className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
+            onClick={() => setPageIndex(0)}
+            disabled={!getCanPreviousPage()}
+          >
+            {"<<"}
+          </button>
+          <button
+            className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
+            onClick={() => previousPage()}
+            disabled={!getCanPreviousPage()}
+          >
+            {"<"}
+          </button>
+
+          <button  
+            className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
+            onClick={() => nextPage()} disabled={!getCanNextPage()}>
+            {">"}
+          </button>
+
+          <button
+            className="rounded border border-gray-200 p-2 text-xs font-medium leading-tight transition duration-150 ease-in-out hover:bg-indigo-500 hover:text-white"
+            onClick={() => setPageIndex(getPageCount() - 1)}
+            disabled={!getCanNextPage()}
+          >
+            {">>"}
+          </button>
+
+          <div className="w-[40%] px-5">
+            Page
+            <strong>
+            &nbsp; {getState().pagination.pageIndex + 1} of{" "}
+              {getPageCount()}
+            </strong>
+          </div>
+
+          <div className="px-5">
+            Go to page:
+            <input
+              className="p-2 block border rounded-[8px]"
+              type="number"
+              defaultValue={getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value
+                  ? Number(e.target.value) - 1
+                  : 0;
+                setPageIndex(page);
+              }}
+            />
+          </div>{" "}
+
+          <select
+            className="px-5 border w-[50%]"
+            value={getState().pagination.pageSize}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value));
+            }}
+          >
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
     </div>
   );
 };
